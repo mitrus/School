@@ -1,0 +1,15 @@
+@(account: Account)
+
+@main("Schools", Some(account)) {
+    <div class="col-md-offset-4 col-md-4">
+        <form action="@routes.Administrator.addSchool" method="post">
+            <h3 class="text-center">Add a school</h3>
+            <div class="form-group">
+                <label for="email">School number</label>
+                <input class="form-control" type="text" name="number" placeholder="number" id="number">
+            </div>
+
+            <button type="submit" class="btn btn-default">Add</button>
+        </form>
+    </div>
+}

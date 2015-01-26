@@ -1,0 +1,18 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                          controllers.Application.index
+GET         /signUp                    controllers.Application.signUp
+POST        /signUp/:permission        controllers.Application.register(permission)
+GET         /signIn                    controllers.Application.signIn
+POST        /signIn                    controllers.Application.authenticate
+GET         /logout                    controllers.Application.logout
+GET         /schools                   controllers.Administrator.schools
+POST        /schools                   controllers.Administrator.addSchool
+GET         /schoolList/:prefix        controllers.Api.searchSchool(prefix)
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file              controllers.Assets.at(path="/public", file)
+GET         /webjars/*file             controllers.WebJarAssets.at(file)

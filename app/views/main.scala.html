@@ -1,0 +1,50 @@
+@(title: String, loggedIn: Option[Account])(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))">
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("js/bootstrap.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))"></script>
+        <script src="@routes.Assets.at("javascripts/hello.js")" type="text/javascript"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+
+            @if(loggedIn.isEmpty) {
+                <ul class="nav navbar-nav">
+                <li><a href="@routes.Application.signUp"> Sign Up </a></li>
+                <li><a href="@routes.Application.signIn"> Sign In </a></li>
+                </ul>
+            } else {
+                @loggedIn.get.permission match {
+                    case AdministratorPermission => {
+                        <ul class="nav navbar-nav">
+                            <li><a href="@routes.Administrator.schools"> Schools </a></li>
+                            <li><a href="#"> Staff </a></li>
+                            <li><a href="#"> Students </a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="navbar-text">Hi, @loggedIn.get.name</li>
+                            <li><a href="@routes.Application.logout"> Logout </a></li>
+                        </ul>
+                    }
+
+                    case _ => {
+                        <ul class="nav navbar-nav navbar-right">
+                        <li><a href="@routes.Application.logout"> Logout </a></li>
+                        </ul>
+                    }
+                }
+            }
+            </div>
+        </nav>
+        @content
+    </body>
+</html>

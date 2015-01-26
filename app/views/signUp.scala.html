@@ -1,0 +1,83 @@
+@(message: String)
+
+@main(message, None) {
+    <div class="row">
+        <div class="row radio">
+            <div class="col-md-offset-2 col-md-4">
+                <h3 class="text-center">
+                    <input type="radio" name="permissions" class="text-center" checked="true" id="studentOption" onclick="toggleRegOption()">Student
+                </h3>
+            </div>
+            <div class="col-md-4">
+                <h3 class="text-center">
+                    <input type="radio" name="permissions" class="text-center" id="teacherOption" onclick="toggleRegOption()">Teacher
+                </h3>
+            </div>
+        </div>
+        <div class="col-md-offset-2 col-md-4" id="regStudentDiv">
+            <form action="@routes.Application.register("student")" method="post">
+                <div class="form-group">
+                    <label for="email">Secret Key</label>
+                    <input class="form-control" type="text" name="secretkey" placeholder="Enter the key...">
+                </div>
+                <div id="underSecretKey">
+                    <div class="form-group">
+                        <label for="email">Form master</label>
+                        <input class="form-control" type="test" placeholder="Form master's name" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Form</label>
+                        <input class="form-control" type="test" placeholder="Form" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">School</label>
+                        <input class="form-control" type="test" placeholder="School number" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off" id="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input class="form-control" type="password" name="password" id="password" autocomplete="off" placeholder="Password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input class="form-control" type="text" name="name" placeholder="Name" autocomplete="off" id="name">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-default">Sign Up</button>
+            </form>
+        </div>
+
+        <div class="col-md-4" id="regTeacherDiv">
+            <form action="@routes.Application.register("teacher")" method="post">
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">School</label>
+                    <input class="form-control" type="text" name="school" placeholder="Name" autocomplete="off" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="form-control" type="password" name="password" autocomplete="off" placeholder="Password" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input class="form-control" type="text" name="name" placeholder="Name" autocomplete="off" disabled>
+                </div>
+
+                <button type="submit" class="btn btn-default" disabled>Sign Up</button>
+            </form>
+        </div>
+    </div>
+}

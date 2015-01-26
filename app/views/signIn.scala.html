@@ -1,0 +1,20 @@
+@(message: String)
+
+@main(message, None) {
+    <div class="col-md-offset-4 col-md-4">
+        <form action="@routes.Application.signIn" method="post">
+            <h3 class="text-center">Sign In</h3>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="email" name="email" placeholder="Email" id="email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+            </div>
+
+            <button type="submit" class="btn btn-default">Sign In</button>
+        </form>
+    </div>
+}
