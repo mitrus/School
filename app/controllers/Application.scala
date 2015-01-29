@@ -106,8 +106,8 @@ object Application extends Controller with MongoController with OptionalAuthElem
               optSecretKey.flatMap {
                 case None => Future.successful { Ok(views.html.index("secret key incorrect", loggedIn)) }
                 case Some(key) => {
-                  val insertUser = usersDB.insert(Account(Utilities.randomAlphanumericString(10), studentData.email, passwordHash, studentData.name, StudentPermission,
-                    models.Student(key.master, key.form, key.school)))
+                  val insertUser = usersDB.insert(Account(Utilities.randomAlphanumericString(10), studentData.email, passwordHash, studentData.name, key.school, StudentPermission,
+                    models.Student(key.master, key.form)))
                   insertUser.map(_ => Ok(views.html.index("OK", loggedIn)))
                 }
               }
@@ -130,8 +130,8 @@ object Application extends Controller with MongoController with OptionalAuthElem
             if (names.length != 0)
               Future.successful {Ok(views.html.index("email exists", loggedIn)) }
             else {
-              val insertUser = users.insert(Account(Utilities.randomAlphanumericString(10), teacherData.email, passwordHash, teacherData.name, TeacherPermission,
-                models.Teacher(teacherData.school, Nil, None)))
+              val insertUser = users.insert(Account(Utilities.randomAlphanumericString(10), teacherData.email, passwordHash, teacherData.name, teacherData.school, TeacherPermission,
+                models.Teacher(Nil, None)))
               insertUser.map(_ => Ok(views.html.index("OK", loggedIn)))
             }
           }

@@ -25,9 +25,20 @@
                 @loggedIn.get.permission match {
                     case AdministratorPermission => {
                         <ul class="nav navbar-nav">
-                            <li><a href="@routes.Administrator.schools"> Schools </a></li>
+                            <li><a href="@routes.AdministratorController.schools"> Schools </a></li>
                             <li><a href="#"> Staff </a></li>
                             <li><a href="#"> Students </a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="navbar-text">Hi, @loggedIn.get.name</li>
+                            <li><a href="@routes.Application.logout"> Logout </a></li>
+                        </ul>
+                    }
+
+                    case TeacherPermission => {
+                        <ul class="nav navbar-nav">
+                            <li><a href="@routes.TeacherController.masterPage"> Master </a></li>
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">

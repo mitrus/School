@@ -15,6 +15,6 @@ import play.modules.reactivemongo.MongoController
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 
-object Students extends Controller with MongoController with AuthElement with AuthConfigImpl {
+object StudentController extends Controller with MongoController with AuthElement with AuthConfigImpl {
 
 }

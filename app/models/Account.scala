@@ -16,6 +16,7 @@ case class Account( id:           String,
                     email:        String,
                     passwordHash: String,
                     name:         String,
+                    school:       String,
                     permission:   UserPermission,
                     user:         User)
 
@@ -36,6 +37,7 @@ object Account extends Controller with MongoController {
         "email" -> account.email,
         "password_hash" -> account.passwordHash,
         "name" -> account.name,
+        "school" -> account.school,
         "permission" -> UserPermission.stringify(account.permission),
         "user" -> user
       )
@@ -52,6 +54,7 @@ object Account extends Controller with MongoController {
         doc.getAs[String]("email").get,
         doc.getAs[String]("password_hash").get,
         doc.getAs[String]("name").get,
+        doc.getAs[String]("school").get,
         permission,
         permission match {
           case StudentPermission =>

@@ -15,7 +15,7 @@ import scala.concurrent.Future
 /**
  * Created by mitrus on 1/22/15.
  */
-object Administrator extends Controller with MongoController with AuthElement with AuthConfigImpl {
+object AdministratorController extends Controller with MongoController with AuthElement with AuthConfigImpl {
 
   case class SchoolData(number: String)
 
@@ -36,7 +36,7 @@ object Administrator extends Controller with MongoController with AuthElement wi
         // TODO: Check weather the school is already exists.
         val schoolDB = db.collection[BSONCollection]("schools")
         schoolDB.insert(School(schoolNumber.number, Nil))
-        Redirect(routes.Administrator.schools)
+        Redirect(routes.AdministratorController.schools)
       }
     )
   }

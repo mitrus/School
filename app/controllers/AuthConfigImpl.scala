@@ -93,6 +93,7 @@ trait AuthConfigImpl extends AuthConfig {
       case (AdministratorPermission, AdministratorPermission)   => true
       case (StudentPermission, StudentPermission)               => true
       case (SchoolPermission, SchoolPermission)                 => true
+      case (TeacherPermission, TeacherPermission)               => true
       case _                                                    => false
     }
   }

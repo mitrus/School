@@ -1,0 +1,24 @@
+@(message: String, account: Account, teacherInfo: Teacher)
+
+@main("Master", Some(account)) {
+    <div class="col-md-offset-4 col-md-4">
+        <h3 class="text-center">@message</h3>
+            @teacherInfo.master match {
+                case None => {
+                    <form action="@routes.TeacherController.becomeMaster" method="post">
+                    <h3 class="text-center">Become a master</h3>
+                    <div class="form-group">
+                        <label for="email">Enter the form ID</label>
+                        <input class="form-control" type="text" name="form" placeholder="form" id="form">
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Become</button>
+                    </form>
+                }
+                case Some(form) => {
+                    <h3 class="text-center">You're the master of @form form</h3>
+                }
+            }
+
+    </div>
+}
