@@ -3,18 +3,28 @@
 # ~~~~
 
 # Home page
-GET         /                          controllers.Application.index
-GET         /signUp                    controllers.Application.signUp
-POST        /signUp/:permission        controllers.Application.register(permission)
-GET         /signIn                    controllers.Application.signIn
-POST        /signIn                    controllers.Application.authenticate
-GET         /logout                    controllers.Application.logout
-GET         /schools                   controllers.AdministratorController.schools
-POST        /schools                   controllers.AdministratorController.addSchool
-GET         /schoolList/:prefix        controllers.Api.searchSchool(prefix)
-GET         /master                    controllers.TeacherController.masterPage
-POST        /master                    controllers.TeacherController.becomeMaster
+GET         /                               controllers.Application.index
+GET         /signUp                         controllers.Application.signUp
+POST        /signUp/:permission             controllers.Application.register(permission)
+GET         /signIn                         controllers.Application.signIn
+POST        /signIn                         controllers.Application.authenticate
+GET         /logout                         controllers.Application.logout
+GET         /schools                        controllers.AdministratorController.schools
+POST        /schools                        controllers.AdministratorController.addSchool
+GET         /master                         controllers.TeacherController.masterPage
+POST        /master                         controllers.TeacherController.becomeMaster
+GET         /students                       controllers.SchoolController.students
+GET         /subjects                       controllers.SchoolController.subjects
+
+# PUBLIC API
+GET         /schoolList/:prefix             controllers.PublicApi.searchSchool(prefix)
+
+# PRIVATE API
+GET         /api/addForm/:form              controllers.PrivateApi.addFormToSchool(form)
+GET         /api/addSubject/:subject        controllers.PrivateApi.addSubjectToSchool(subject)
+
+
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file              controllers.Assets.at(path="/public", file)
-GET         /webjars/*file             controllers.WebJarAssets.at(file)
+GET         /assets/*file                   controllers.Assets.at(path="/public", file)
+GET         /webjars/*file                  controllers.WebJarAssets.at(file)

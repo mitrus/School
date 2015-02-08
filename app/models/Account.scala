@@ -18,18 +18,16 @@ case class Account( id:           String,
                     name:         String,
                     school:       String,
                     permission:   UserPermission,
-                    user:         User)
+                    user:         Option[User])
 
 object Account extends Controller with MongoController {
   implicit object AccountBSONWriter extends BSONDocumentWriter[Account] {
     def write(account: Account) = {
-      val user = account.user match {
+      val optUser = account.user.map {
         case student: Student =>
           Student.StudentBSONWriter.write(student)
         case teacher: Teacher =>
           Teacher.TeacherBSONWriter.write(teacher)
-        case _ =>
-          throw new IllegalStateException()
       }
 
       val bson = BSONDocument(
@@ -38,11 +36,13 @@ object Account extends Controller with MongoController {
         "password_hash" -> account.passwordHash,
         "name" -> account.name,
         "school" -> account.school,
-        "permission" -> UserPermission.stringify(account.permission),
-        "user" -> user
+        "permission" -> UserPermission.stringify(account.permission)
       )
-
-      bson
+      optUser.map { user =>
+        bson.add("user" -> user)
+      } getOrElse {
+        bson
+      }
     }
   }
 
@@ -58,11 +58,11 @@ object Account extends Controller with MongoController {
         permission,
         permission match {
           case StudentPermission =>
-            doc.getAs[Student]("user").get
+            doc.getAs[Student]("user")
           case TeacherPermission =>
-            doc.getAs[Teacher]("user").get
+            doc.getAs[Teacher]("user")
           case _ =>
-            throw new IllegalStateException()
+            None
         })
     }
   }

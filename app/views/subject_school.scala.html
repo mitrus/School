@@ -1,0 +1,24 @@
+@(account: Account, subjects: List[String])
+
+@main("Subjects", Some(account)) {
+    <div style="height:500px; width:300px; border-right: 1px solid #000">
+        <div class="panel panel-default" style="width:230px; margin-left:40px; background-color:#f8f8f8">
+            <div style="margin-left:20px" class="panel-body">
+                <button class="btn btn-default" style="margin-right:10px" id="add_form_but" onclick="if ($('#add_form').css('display') == 'none') {$('#add_form').show(100);}">Add subject</button>
+                <select id="forms_list">
+
+                @for(subject <- subjects) {
+                    <option value="volvo">@subject</option>
+                }
+
+                </select>
+
+            </div>
+            <div style="width: 130px; padding: 4px; border: 1px solid rgb(119, 119, 119); position: absolute; top: 150px; left: 40px; display: none;" id="add_form">
+                <input type="text" style="width:70px" id="form_number_input">
+                <button style="width:40px; float:right;" onclick="addSubject()"> Add</button>
+
+            </div>
+        </div>
+    </div>
+}

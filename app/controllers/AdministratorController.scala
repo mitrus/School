@@ -35,7 +35,7 @@ object AdministratorController extends Controller with MongoController with Auth
       schoolNumber => {
         // TODO: Check weather the school is already exists.
         val schoolDB = db.collection[BSONCollection]("schools")
-        schoolDB.insert(School(schoolNumber.number, Nil))
+        schoolDB.insert(School(schoolNumber.number, Nil, Nil))
         Redirect(routes.AdministratorController.schools)
       }
     )

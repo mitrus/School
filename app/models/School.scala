@@ -11,15 +11,17 @@ import scala.concurrent.ExecutionContext.Implicits.global
 /**
  * Created by mitrus on 1/23/15.
  */
-case class School ( number:     String,
-                    students:   List[String])
+case class School( number:     String,
+                   forms:      List[Form],
+                   subjects:   List[Subject])
 
 object School extends Controller with MongoController {
   implicit object SchoolBSONWriter extends BSONDocumentWriter[School] {
     def write(school: School) = {
       val bson = BSONDocument(
         "number" -> school.number,
-        "students" -> school.students
+        "forms" -> school.forms,
+        "subjects" -> school.subjects
       )
       bson
     }
@@ -29,7 +31,8 @@ object School extends Controller with MongoController {
     def read(doc: BSONDocument) = {
       School(
         doc.getAs[String]("number").get,
-        doc.getAs[List[String]]("students").get
+        doc.getAs[List[Form]]("forms").get,
+        doc.getAs[List[Subject]]("subjects").get
       )
     }
   }
